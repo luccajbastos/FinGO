@@ -1,0 +1,2 @@
+# FinGO
+Finance Software

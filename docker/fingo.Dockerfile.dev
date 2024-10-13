@@ -1,0 +1,16 @@
+FROM python:3.10.12
+
+WORKDIR /app/
+
+COPY requeriments.txt ./requeriments.txt
+RUN pip install --no-cache-dir -r ./requeriments.txt
+
+COPY entry-point-dev.sh ./entry-point.sh
+RUN chmod +x ./entry-point.sh
+
+COPY ./fingo/ fingo
+COPY ./manage.py manage.py
+
+ENTRYPOINT ["sh", "-c", "./entry-point.sh"]
+
+EXPOSE 8000

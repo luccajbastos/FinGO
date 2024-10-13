@@ -1,0 +1,4 @@
+Django
+crispy-bootstrap5
+django-crispy-forms
+psycopg

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  dbdev:
+    image: postgres:15-alpine
+    container_name: fingo_postgredb_dev
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: fingodev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+  # fingodev:
+  #   build:
+  #     context: ./
+  #     dockerfile: fingo.Dockerfile.dev
+  #   container_name: fingo_dev
+  #   environment:
+  #     DB_HOST: dbdev
+  #     DB_PORT: 5432
+  #     DB_USER: root
+  #     DB_PASSWORD: dev
+  #     DB_NAME: fingodev
+  #   ports:
+  #     - "8000:8000"  # Adjust this to your app's exposed port
+  #   depends_on:
+  #     - dbdev
+  #   networks:
+  #     - my_network
+
+volumes:
+  pgdata:
+
+networks:
+  my_network:
+    driver: bridge

@@ -4,5 +4,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="FinGO"),
-    path('add-expensive', views.add_expense, name="add-expense")
+    path('despesas', views.despesas, name="despesas"),
+    path('receitas', views.receitas, name="receitas"),
+    path('categorias', views.categorias, name="categorias"),
+    path('metas', views.metas, name="metas"),
+    path('configuracoes', views.configuracoes, name="configuracoes"),
 ]

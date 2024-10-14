@@ -1,0 +1,116 @@
+{% load static %}
+
+<style>
+
+  .sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 250px;
+      background-color: #343a40;
+      padding: 20px;
+      color: white;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      transition: width 0.3s;
+  }
+
+  .sidebar a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      display: block;
+      padding: 10px 0;
+      transition: background-color 0.3s;
+  }
+
+  .sidebar a:hover {
+      background-color: #495057;
+      border-radius: 5px;
+  }
+
+  .sidebar .sidebar-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 30px;
+  }
+
+  .sidebar .sidebar-menu {
+      list-style: none;
+      padding: 0;
+  }
+
+  .sidebar .sidebar-menu li {
+      margin-bottom: 10px;
+  }
+
+  .sidebar .sidebar-menu i {
+      margin-right: 10px;
+  }
+
+  .main-content {
+      margin-left: 270px;
+      padding: 20px;
+  }
+
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+      .sidebar {
+          width: 200px;
+      }
+      .main-content {
+          margin-left: 220px;
+      }
+  }
+</style>
+
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-header">
+      {% block title %} FinGO {% endblock%}
+  </div>
+  <ul class="sidebar-menu">
+      <li>
+          <a href="#">
+              <i class="bi bi-house-door"></i> Dashboard
+          </a>
+      </li>
+      <li>
+          <a href="#">
+              <i class="bi bi-wallet2"></i> * Importar do seu banco
+          </a>
+      </li>
+      <li>
+          <a href="#">
+              <i class="bi bi-bar-chart"></i> Despesas
+          </a>
+      </li>
+      <li>
+          <a href="#">
+              <i class="bi bi-cash-coin"></i> Receitas
+          </a>
+      </li>
+      <li>
+          <a href="#">
+              <i class="bi bi-bookmark"></i> Categorias
+          </a>
+      </li>
+      <li>
+        <a href="#">
+            <i class="bi bi-bullseye"></i> Metas
+        </a>
+      </li>
+      <li>
+          <a href="#">
+              <i class="bi bi-gear"></i> Configurações
+          </a>
+      </li>
+  </ul>
+</div>
+
+
+<!-- Bootstrap 5 JS and Icons -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>

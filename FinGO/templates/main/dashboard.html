@@ -1,0 +1,280 @@
+{% load static %}
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    {% block content %}
+
+        {% include 'partials/_base.html' %}
+
+        <div class="container mt-5">
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <h1 class="fw-bold">Organizador Financeiro</h1>
+            </div>
+        
+            <!-- Gráfico de Séries Temporais no Topo -->
+            <div class="row text-center">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <div class="chart-container">
+                        <h5 class="text-center">Saúde Financeira (Limite Máximo de Gasto por Mês)</h5>
+                        <canvas id="healthTimeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filters and Notifications -->
+            <div class="row filter-bar">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Buscar por categoria, despesa ou receita">
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-primary">Filtros</button>
+                </div>
+            </div>
+        
+            <div class="notification text-center">
+                <p><strong>Alerta:</strong> Você ultrapassou sua meta de gastos semanais!</p>
+            </div>
+        
+            <!-- Financial Overview -->
+            <div class="row text-center mt-4">
+                <!-- Saldo Atual -->
+                <div class="col-md-4 overview-item">
+                    <div class="card">
+                        <div class="card-header">Saldo Atual</div>
+                        <div class="card-body">
+                            <h2 class="text-success">R$ 3.250,00</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- Despesas Mensais -->
+                <div class="col-md-4 overview-item">
+                    <div class="card">
+                        <div class="card-header">Despesas Mensais</div>
+                        <div class="card-body">
+                            <h2 class="text-danger">R$ 1.800,00</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- Receitas -->
+                <div class="col-md-4 overview-item">
+                    <div class="card">
+                        <div class="card-header">Receitas</div>
+                        <div class="card-body">
+                            <h2 class="text-primary">R$ 5.000,00</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Forecast -->
+            <div class="row text-center mt-4">
+                <!-- Previsão de Gastos Diário -->
+                <div class="col-md-6 overview-item">
+                    <div class="card">
+                        <div class="card-header">Previsão de Gastos Diário</div>
+                        <div class="card-body">
+                            <h2>R$ 120,00</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- Previsão de Gastos Semanal -->
+                <div class="col-md-6 overview-item">
+                    <div class="card">
+                        <div class="card-header">Previsão de Gastos Semanal</div>
+                        <div class="card-body">
+                            <h2>R$ 840,00</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Categorias de Gastos -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">Categorias de Gastos</div>
+                        <div class="card-body">
+                            <span class="badge bg-primary badge-category">Alimentação</span>
+                            <span class="badge bg-secondary badge-category">Transporte</span>
+                            <span class="badge bg-success badge-category">Educação</span>
+                            <span class="badge bg-danger badge-category">Entretenimento</span>
+                            <span class="badge bg-warning badge-category">Saúde</span>
+                            <span class="badge bg-info badge-category">Outros</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Gráfico de Pie no Fim da Página -->
+            <div class="row text-center mt-5">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <div class="chart-container">
+                        <h5 class="text-center">Categorias de Gastos</h5>
+                        <canvas id="kpiPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    {% endblock content%}
+  </main>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        font-weight: bold;
+        font-size: 1.2rem;
+        background-color: #343a40;
+        color: white;
+        text-align: center;
+        border-bottom: none;
+    }
+
+    .overview-item {
+        margin-bottom: 20px;
+    }
+
+    .notification {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .filter-bar {
+        margin-bottom: 20px;
+    }
+
+    .badge-category {
+        font-size: 0.9rem;
+        margin-right: 10px;
+    }
+
+    .chart-container {
+        max-width: auto;
+        margin: 0 auto;
+    }
+
+    .charts-row {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .charts-row .chart-container {
+        margin-bottom: 20px;
+    }
+
+    .financial-overview {
+        margin-top: 40px;
+    }
+
+    canvas {
+        height: 500px; /* Aumenta a altura do gráfico */
+    }
+</style>
+
+<script src="{% static '/js/graph/Chart.js' %}"></script>
+
+
+
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // KPI Pie Chart (Categorias de Gastos)
+    const pieCtx = document.getElementById('kpiPieChart').getContext('2d');
+    const kpiPieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Alimentação', 'Transporte', 'Educação', 'Entretenimento', 'Saúde', 'Outros'],
+            datasets: [{
+                data: [500, 300, 200, 400, 150, 250],  // Exemplo de valores de categorias
+                backgroundColor: ['#007bff', '#28a745', '#ffc107', '#17a2b8', '#dc3545', '#6c757d'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+
+    // Saúde Financeira - Time Series (Limite Máximo de Gasto por Mês)
+    const timeCtx = document.getElementById('healthTimeChart').getContext('2d');
+    const healthTimeChart = new Chart(timeCtx, {
+        type: 'line',
+        data: {
+            labels: ['01/10', '05/10', '10/10', '15/10', '20/10', '25/10', '30/10'],
+            datasets: [{
+                label: 'Gasto Diário Realizado',
+                data: [25, 120, 55, 62, 80, 21, 10, 0],  // Exemplo de gastos ao longo do mês
+                borderColor: '#007bff',
+                fill: false,
+                tension: 0.1
+            }, {
+                label: 'Limite Máximo Diáro',
+                data: [120, 120, 120, 120, 120, 120, 120, 120],  // Limite máximo de gastos por período
+                borderColor: '#FF0000',
+                fill: true,
+                tension: 0.1
+            }, {
+                label: 'Limite Saudável Diáro',
+                data: [80, 80, 80, 80, 80, 80, 80, 80],  // Limite máximo de gastos por período
+                borderColor: '#FFFF00',
+                fill: true,
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'R$'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Data'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(context.parsed.y);
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
